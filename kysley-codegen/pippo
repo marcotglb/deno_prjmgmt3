@@ -1,0 +1,3 @@
+• Loaded environment variables from .env file.
+• No dialect specified. Assuming 'postgres'.
+• Introspecting database...

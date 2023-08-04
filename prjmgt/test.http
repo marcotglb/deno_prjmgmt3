@@ -1,0 +1,170 @@
+
+@token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjMwNTM5OTg5fQ.975N7IbGQwLlEjZVrTlOnbcXTLcP-JeKfFGFnztA2mIJQRpBDm_QbhMjmKEK4KRlXzyf1C8K1nLq0I4-HANbbQ
+
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "logon": "gimmy",
+    "password": "usa"
+}
+
+###
+
+GET http://localhost:8000/sync_tables
+Content-Type: application/json
+
+{
+  "_meta": {}
+}
+
+###
+
+POST http://localhost:8000/sync_tables
+Content-Type: application/json
+
+{
+  "_meta": {"action": "add"},
+  "table_name": "table_xx",
+  "key": {  "id": "->"},
+  "joincond": "(v.\"id\" = (q.key->'id')::int)",
+  "seqname": "csm_sessions_id2_seq",
+  "table_schema": "public"
+}
+
+###
+
+POST http://localhost:8000/sync_tables
+Content-Type: application/json
+
+{
+  "_meta": {"action": "triggerAdd"},
+  "table_name": "deliverables",
+  "key": {"id": "->", "name": "->>"},
+  "table_schema": "project"
+}
+
+###
+
+POST http://localhost:8000/sync_tables
+Content-Type: application/json
+
+{
+  "_meta": {"action": "triggerDel"},
+  "table_name": "deliverables",
+  "table_schema": "project"
+}
+
+###
+
+POST http://localhost:8000/sync_tables
+Content-Type: application/json
+
+{
+  "_meta": {"action": "sequencePatch"},
+  "table_name": "deliverables",
+  "table_schema": "project"
+}
+
+
+###
+
+
+GET http://localhost:8000/users?top=0
+Content-Type: application/json
+
+
+###
+
+
+GET http://localhost:8000/deliverables?top=0
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Update one or more Deliverables
+
+PATCH http://localhost:8000/deliverables
+Content-Type: application/json
+
+{
+  "filter": {"id": 18},
+  "values": {"what": "Espansione Volumi LPAR via Proxy 3" }
+}
+
+### Delete one or more Deliverables
+
+DELETE http://localhost:8000/deliverables
+Content-Type: application/json
+
+{"id": 1}
+
+###
+
+GET http://localhost:8000/private
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:8000/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST http://localhost:8000/login
+Content-Type: application/json
+
+  {
+    "username": "marco",
+    "password": "password"
+  }
+
+###
+
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "logon": "abram",
+    "firstname": "Abraham",
+    "lastname": "Lincoln",
+    "password": "usa",
+    "organizationcode": 1,
+    "email": "gimmy.carter@president.us"
+}
+
+###
+
+POST https://it0lstans0.generalinet.com/api/v2/job_templates/82/launch/
+Content-Type: application/json
+Authorization: Bearer m1aXt9Yhb6uIWWQ9YBmIgOppTWHodg
+
+{
+  "extra_vars": {
+    "csm_server": "10.180.83.17",
+    "session_name": "GM_MV_ZZ0MARCO3949_R1",
+    "svc_site1": "SVCCMV-0039",
+    "volume_site1": "651",
+    "keeponhw": "true"
+  }
+}
+
+###
+POST https://it0lstans0.generalinet.com/api/v2/job_templates/50/launch/
+Content-Type: application/json
+Authorization: Bearer m1aXt9Yhb6uIWWQ9YBmIgOppTWHodg
+
+{
+    "extra_vars" = {
+        "csm_server": "10.180.83.17",
+        "session_name": "GM_MV_ZZ0MARCO3949_R1",
+        "svc_site1": "SVCCMV-0039",
+        "svc_site2": "SVCCPD-0049"
+        "volume_site1": "651",
+        "volume_site1": "676"
+      }
+}
+
+
+### 
+GET https://it0lstans0.generalinet.com/api/v2/jobs/54949/stdout?format=txt' \
+Authorization: Bearer m1aXt9Yhb6uIWWQ9YBmIgOppTWHodg

@@ -1,0 +1,57 @@
+
+import axios from 'axios'
+//axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+//axios.defaults.headers.common['Access-Control-Allow-Origin'] = "true";
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+//res.header("Access-Control-Allow-Origin", "true");
+axios.defaults.timeout = 100000;
+
+
+export default class Deliverable {
+
+    constructor(value) {
+        if (value)
+          this.value = value;
+        return this;
+    }
+
+    async get(filter) {
+        console.log('Deliverable.get(filter). filter=', filter)
+        try {
+            let res = await axios.get('http://localhost:8000/deliverables', { params: filter });
+            console.log(res)
+            return res.data;
+        } catch (err) {
+            console.error(err)
+        }
+        return null;
+    }
+
+    async upd (value, filter) {
+        //this.value = value;
+        //this.filter = filter;
+        console.log('updating deliverable...')
+        try {
+            let res = await axios.patch('http://localhost:8000/deliverables', {value: value, filter: filter});
+            console.log(res)
+            return res.data;
+        } catch (err) {
+            console.error(err)
+        }
+        return null;
+    }
+
+    async create (value) {
+        //this.value = value;
+        //this.filter = filter;
+        console.log('adding deliverable...')
+        try {
+            let res = await axios.post('http://localhost:8000/deliverables', value);
+            console.log(res)
+            return res.data;
+        } catch (err) {
+            console.error(err)
+        }
+        return null;
+    }
+}

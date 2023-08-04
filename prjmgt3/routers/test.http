@@ -1,0 +1,30 @@
+
+
+
+@token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjkwOTM1MjEzfQ.lW4oI0c7BaJbO_m1QmSAkJ6O2n9aSOVuzH5dgXD28VK8WF2j6ORnS0IPtgXAncraOeFI5uM7OYAfngtEe9drsw
+
+### Obtain Token MV
+POST http://localhost:8000/users/login
+Content-Type: application/json
+
+{
+"username": "marco",
+"password": "password"
+}
+
+
+### update user
+PATCH http://localhost:8000/users/11
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "firstname": "Anna"
+}
+
+### delete user
+DELETE http://localhost:8000/users/10
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
