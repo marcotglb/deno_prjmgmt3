@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './views/AppTabs.vue'
 import router from './router' // <---
 import Store from './store/Store';
-import { createPinia } from "pinia";
+// import { createPinia } from "pinia";
 import PrimeVue from 'primevue/config';
 
 import Menubar from 'primevue/menubar';
@@ -69,7 +69,7 @@ app.component('TabPanel', TabPanel);
 app.use(PrimeVue)
 
 app.use(Store);
-app.use(createPinia());
+//app.use(createPinia());
 
 app.use(router).mount('#app')   // l'applicazione vue viene montanta sull'elemento app del DOM.//
 //app.mount('#app');

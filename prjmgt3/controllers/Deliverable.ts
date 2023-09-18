@@ -6,7 +6,7 @@ import { DeliverableUpdate, Deliverable, NewDeliverable } from '../db/types.ts'
 
 
 export async function findDeliverable(criteria: Partial<Deliverable>) {
-  let query = db.selectFrom('projects.deliverables')
+  let query = db.selectFrom('projects.v_deliverables')
 
   if (criteria.id) {
     query = query.where('id', '=', criteria.id)
@@ -17,7 +17,10 @@ export async function findDeliverable(criteria: Partial<Deliverable>) {
     query = query.where('father', '=', criteria.top)
   }
 
-  return await query.selectAll().execute()
+  log.info(query.compile());
+
+  let deliverables = await query.selectAll().execute();
+  return deliverables;
 }
 
 
@@ -56,7 +59,7 @@ class DeliverableCtrl {
     let deliverables = await findDeliverable(params);
 
     log.info(`Found ${deliverables.length} rows`);
-    ctx.response.body = deliverables ? deliverables : "undefined";
+    ctx.response.body = deliverables ? deliverables : [];
   }
 
   async patch(ctx: RouterContext) {
